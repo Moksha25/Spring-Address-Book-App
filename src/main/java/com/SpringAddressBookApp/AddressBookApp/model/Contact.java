@@ -1,14 +1,20 @@
-package com.SpringAddressBookApp.AddressBookApp.entity;
+package com.SpringAddressBookApp.AddressBookApp.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "contacts")
 public class Contact {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String phone;
 
     public Contact() {}
 
-    public Contact(Long id, String name, String phone) {
-        this.id = id;
+    public Contact(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
