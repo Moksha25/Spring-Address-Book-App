@@ -23,10 +23,6 @@ public class Contact {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -42,3 +38,4 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+}

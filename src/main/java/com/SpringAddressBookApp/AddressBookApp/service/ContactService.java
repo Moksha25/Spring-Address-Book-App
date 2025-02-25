@@ -30,8 +30,8 @@ public class ContactService {
 
     public Optional<Contact> updateContact(Long id, ContactDTO contactDTO) {
         return contactRepository.findById(id).map(contact -> {
-            contact.setName(contactDTO.getName());
-            contact.setPhone(contactDTO.getPhone());
+            contactDTO.setName(contactDTO.getName());
+            contactDTO.setPhone(contactDTO.getPhone());
             return contactRepository.save(contact);
         });
     }
