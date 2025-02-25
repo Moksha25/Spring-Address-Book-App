@@ -4,3 +4,9 @@
 2025-02-25 16:20:20 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
 2025-02-25 16:20:24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2025-02-25 16:20:25 [restartedMain] INFO  c.S.A.AddressBookAppApplication - Started AddressBookAppApplication in 15.095 seconds (process running for 16.231)
+2025-02-25 16:45:36 [restartedMain] INFO  c.S.A.AddressBookAppApplication - Starting AddressBookAppApplication using Java 19.0.1 with PID 36916 (E:\capgemini training\Spring Address Book App\target\classes started by hp in E:\capgemini training\Spring Address Book App)
+2025-02-25 16:45:36 [restartedMain] INFO  c.S.A.AddressBookAppApplication - The following 1 profile is active: "prod"
+2025-02-25 16:45:42 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-25 16:45:42 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-02-25 16:45:45 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-25 16:45:46 [restartedMain] INFO  c.S.A.AddressBookAppApplication - Started AddressBookAppApplication in 11.954 seconds (process running for 13.246)
