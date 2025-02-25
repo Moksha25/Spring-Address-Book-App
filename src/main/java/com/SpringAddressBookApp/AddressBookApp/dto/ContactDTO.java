@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class ContactDTO {
     private String name;
-    private String email;
     private String phone;
 }
