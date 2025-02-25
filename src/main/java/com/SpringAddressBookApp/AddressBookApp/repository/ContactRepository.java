@@ -1,6 +1,6 @@
 package com.SpringAddressBookApp.AddressBookApp.repository;
 
-import com.SpringAddressBookApp.AddressBookApp.entity.Contact;
+import com.SpringAddressBookApp.AddressBookApp.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

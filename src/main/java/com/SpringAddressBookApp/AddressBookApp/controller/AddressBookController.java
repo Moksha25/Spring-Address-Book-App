@@ -1,10 +1,12 @@
 package com.SpringAddressBookApp.AddressBookApp.controller;
 
-import com.SpringAddressBookApp.AddressBookApp.entity.Contact;
+import com.SpringAddressBookApp.AddressBookApp.dto.ContactDTO;
+import com.SpringAddressBookApp.AddressBookApp.model.Contact;
+import com.SpringAddressBookApp.AddressBookApp.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,51 +14,38 @@ import java.util.Optional;
 @RequestMapping("/contacts")
 public class AddressBookController {
 
-    private final List<Contact> contactList = new ArrayList<>();
-    private Long contactIdCounter = 1L; // Auto-incrementing ID
+    @Autowired
+    public ContactService contactService;
 
-    // ✅ Get all contacts
     @GetMapping
     public List<Contact> getAllContacts() {
-        return contactList;
+        return contactService.getAllContacts();
     }
 
-    // ✅ Get contact by ID
     @GetMapping("/{id}")
     public ResponseEntity<Contact> getContactById(@PathVariable Long id) {
-        Optional<Contact> contact = contactList.stream()
-                .filter(c -> c.getId().equals(id))
-                .findFirst();
+        Optional<Contact> contact = contactService.getContactById(id);
         return contact.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // ✅ Add a new contact
     @PostMapping
-    public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
-        contact.setId(contactIdCounter++);
-        contactList.add(contact);
-        return ResponseEntity.status(201).body(contact);
+    public ResponseEntity<Contact> createContact(@RequestBody ContactDTO contactDTO) {
+        Contact newContact = contactService.addContact(contactDTO);
+        return ResponseEntity.status(201).body(newContact);
     }
 
-    // ✅ Update an existing contact
     @PutMapping("/{id}")
-    public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody Contact updatedContact) {
-        for (Contact contact : contactList) {
-            if (contact.getId().equals(id)) {
-                contact.setName(updatedContact.getName());
-                contact.setPhone(updatedContact.getPhone());
-                return ResponseEntity.ok(contact);
-            }
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody ContactDTO contactDTO) {
+        return contactService.updateContact(id, contactDTO)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // ✅ Delete a contact
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteContact(@PathVariable Long id) {
-        boolean removed = contactList.removeIf(contact -> contact.getId().equals(id));
-        if (removed) {
+        boolean deleted = contactService.deleteContact(id);
+        if (deleted) {
             return ResponseEntity.ok("Contact with ID " + id + " deleted successfully.");
         } else {
             return ResponseEntity.notFound().build();
