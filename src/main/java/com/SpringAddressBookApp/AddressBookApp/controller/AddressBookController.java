@@ -3,6 +3,7 @@ package com.SpringAddressBookApp.AddressBookApp.controller;
 import com.SpringAddressBookApp.AddressBookApp.dto.ContactDTO;
 import com.SpringAddressBookApp.AddressBookApp.model.Contact;
 import com.SpringAddressBookApp.AddressBookApp.service.ContactService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,14 +40,14 @@ public class AddressBookController {
     }
 
     @PostMapping
-    public ResponseEntity<Contact> createContact(@RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<Contact> createContact(@RequestBody @Valid ContactDTO contactDTO) {
         log.info("Received request to create a new contact: {}", contactDTO);
         Contact newContact = contactService.addContact(contactDTO);
         return ResponseEntity.status(201).body(newContact);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody @Valid ContactDTO contactDTO) {
         log.info("Received request to update contact with ID: {}", id);
         return contactService.updateContact(id, contactDTO)
                 .map(ResponseEntity::ok)
