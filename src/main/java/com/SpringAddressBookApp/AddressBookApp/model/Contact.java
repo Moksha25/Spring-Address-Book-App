@@ -1,6 +1,9 @@
 package com.SpringAddressBookApp.AddressBookApp.model;
 
 import jakarta.persistence.*;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 @Entity
 @Table(name = "contacts")
@@ -38,4 +41,5 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 }

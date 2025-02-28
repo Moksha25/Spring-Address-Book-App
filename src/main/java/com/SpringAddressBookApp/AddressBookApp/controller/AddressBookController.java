@@ -31,7 +31,7 @@ public class AddressBookController {
     @GetMapping("/{id}")
     public ResponseEntity<Contact> getContactById(@PathVariable Long id) {
         log.info("Received request to fetch contact with ID: {}", id);
-        Optional<Contact> contact = contactService.getContactById(id);
+        Optional<Contact> contact = Optional.ofNullable(contactService.getContactById(id));
         return contact.map(ResponseEntity::ok)
                 .orElseGet(() -> {
                     log.warn("Contact with ID: {} not found", id);
@@ -49,13 +49,10 @@ public class AddressBookController {
     @PutMapping("/{id}")
     public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody @Valid ContactDTO contactDTO) {
         log.info("Received request to update contact with ID: {}", id);
-        return contactService.updateContact(id, contactDTO)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> {
-                    log.warn("Contact with ID: {} not found for update", id);
-                    return ResponseEntity.notFound().build();
-                });
+        Contact updatedContact = contactService.updateContact(id, contactDTO);
+        return ResponseEntity.ok(updatedContact);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteContact(@PathVariable Long id) {
